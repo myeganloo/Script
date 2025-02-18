@@ -1,0 +1,4 @@
+MYSQL_USER='root'
+MYSQL_PASSWORD='root'
+DATABASE_NAME='credit'
+CONTAINER_NAME=credit-mysql

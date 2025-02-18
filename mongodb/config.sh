@@ -1,0 +1,10 @@
+MONGO_USER='root'
+MONGO_PASSWORD='root'
+dbName='credit'
+CONTAINER_NAME=credit-credit-mongo-1
+getCurrentDate=$(date +"%Y-%m-%d")
+getCurrentTime=$(date +"%H-%M-%S")
+storeDumpPath=~/backups/data/credit-mongodb/"${getCurrentDate}"/
+logFilePath=~/backups/logs/"${getCurrentDate}"/
+logFileName="${getCurrentTime}.log"
+storeDumpName="credit-${getCurrentDate}-${getCurrentTime}.dump"

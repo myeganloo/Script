@@ -1,0 +1,51 @@
+#don't forget to add healthChecks if needed
+######################################################
+######################################################
+
+ 
+
+#Backups
+######### credit ##########
+#Technopay-Mysql-Backup-Production
+*/30 * * * * bash /root/backups/credit/credit-mariadb/backup_credit_mariadb.sh && curl -fsS --retry 3 https://hc-ping.com/7263464e-4dad-4988-bc50-48dadc0848a8 >> /dev/null 2>&1
+#Technopay-Mysql-remove-credit-Backup-Production
+*/30 * * * * bash/root/backups/credit/credit-mariadb/remove_old_credit_mariadb.sh && curl -fsS --retry 3 https://hc-ping.com/2b891b1b-6df1-4713-bec1-e2ba744182c6 >> /dev/null 2>&1
+
+#Technopay-mongodb-credit-Backup-Production
+*/30 * * * * bash /root/backups/credit/credit-mongodb/backup_credit_mongo.sh && curl -fsS --retry 3 https://hc-ping.com/bb63073d-5fc2-42c4-932a-b03bb1b7fbe1 >> /dev/null 2>&1
+#Technopay-mongodb-remove-Backup-Production
+*/30 * * * * bash /root/backups/credit/credit-mongodb/remove_old_credit_mongo.sh && curl -fsS --retry 3 https://hc-ping.com/6dc2bbd4-86a4-4f50-b1ed-6c01f1333256 >> /dev/null 2>&1
+
+#Technopay-Mysql-payment-Backup-Production
+*/30 * * * * bash /root/backups/payment/payment-mariadb/backup_payment_mariadb.sh && curl -fsS --retry 3 https://hc-ping.com/e7f2b874-5164-4370-8c92-a0fc0287f41e >> /dev/null 2>&1
+#Technopay-Mysql-remove-payment-Backup-Production
+*/30 * * * * bash /root/backups/payment-mariadb/payment/remove_old_payment_mariadb.sh && curl -fsS --retry 3 https://hc-ping.com/03be46a5-9d43-4f9e-bde2-6dad178d296a >> /dev/null 2>&1
+
+#Technopay-Mongodb-Payment-Backup-Production
+*/30 * * * * bash /root/backups/payment/payment-mongodb/backup_payment_mongo.sh && curl -fsS --retry 3 https://hc-ping.com/4cd1529d-0fe5-456f-96da-8a1311480de1 >> /dev/null 2>&1
+#Technopay-Mongodb-Remove-Payment-Backup-Production
+*/30 * * * * bash /root/backups/payment/payment-mongodb/remove_old_payment_mongo.sh && curl -fsS --retry 3 https://hc-ping.com/d01704f3-1c24-45f8-b535-880eb3a6e66f >> /dev/null 2>&1
+
+ 
+ 
+ 
+#Rsync command (staging)
+######### Run on Backup Server #########
+#########<backupmachine><please set ssh config file address server >###########
+#Technopay-Mysql-Rsync-Production
+*/30 * * * * rsync <BACKUP_MACHINE>:/root/backups/data/credit-mysql/ ~/backup/credit-mysql && curl -fsS --retry 3 https://hc-ping.com/3fe0c720-0d79-402f-a57c-5625788aa7af
+#Technopay-Mysql-remove-credit-Rsync-Production
+0 1 * * * <BASH_FOR_DATA_RETENSION>  && curl -fsS --retry 3 https://hc-ping.com/87581c3d-3acf-4252-b22f-367f5a3be706
+#Technopay-mongodb-credit-Rsync-Production
+*/30 * * * * rsync <BACKUP_MACHINE>:/root/backups/credit-mongodb/ ~/backup/credit-mongodb && curl -fsS --retry 3 https://hc-ping.com/5ef5a160-0c76-494a-9e47-e982c78914ad
+#Technopay-mongodb-remove-Rsync-Production
+0 1 * * * <BASH_FOR_DATA_RETENSION> && curl -fsS --retry 3  https://hc-ping.com/91b2c4c1-84d7-4a1f-8df7-ea64375acc93
+#Technopay-Mysql-payment-Rsync-Production
+*/30 * * * * rsync <BACKUP_MACHINE>:/root/backups/data/payment-mysql/ ~/backup/payment-mysql  && curl -fsS --retry 3 https://hc-ping.com/b85fa007-f3cd-4e9c-a807-d42f61b74de8
+#Technopay-Mysql-remove-payment-Rsync-Production
+0 1 * * * <BASH_FOR_DATA_RETENSION> && curl -fsS --retry 3  https://hc-ping.com/d9ba3fcb-bd57-4e80-9e9b-1ca6a07866dd
+#Technopay-Mongodb-Payment-Rsync-Production
+*/30 * * * * rsync <BACKUP_MACHINE>:/root/backups/payment-mongodb/ ~/backup/payment-mongodb && curl -fsS --retry 3 https://hc-ping.com/2d64b377-d24e-41bf-a4ed-2bd47fa98071
+#Technopay-Mongodb-Remove-Payment-Rsync-Production
+0 1 * * * <BASH_FOR_DATA_RETENSION>  && curl -fsS --retry 3 https://hc-ping.com/6a3bb6d6-b483-4817-b2d0-2e1380e26ba3
+####
